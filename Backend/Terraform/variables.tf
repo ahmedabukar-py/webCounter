@@ -1,0 +1,39 @@
+variable "bucket_name" {
+  description = "The name of the S3 bucket"
+  type        = string
+}
+
+variable "index_document" {
+  description = "The index document for the website"
+  type        = string
+  default     = "index.html"
+}
+
+variable "error_document" {
+  description = "The error document for the website"
+  type        = string
+  default     = "error.html"
+}
+
+variable "frontend_directory" {
+  description = "The directory containing frontend files"
+  type        = string
+}
+
+variable "zone_id" {
+  description = "The directory containing frontend files"
+  type        = string
+}
+
+variable "domain_name" {
+  type = string
+}
+
+variable "cert_validation_name" {
+  type = string
+}
+
+variable "region" {
+  description = "The region resource will be provisioned in"
+  type        = string
+}

@@ -1,0 +1,18 @@
+# Ignore the Terraform state files
+.DS_Store
+LICENSE.txt
+terraform.tfstate
+terraform-*
+
+
+# Ignore the Terraform state files
+terraform.tfstate
+terraform.tfstate.backup
+
+# Ignore the Terraform provider directory
+Backend/Terraform/.terraform/
+Backend/Terraform/AWSCLIV2.pkg
+Backend/Terraform/terraform.tfstate.*
+Backend/Terraform/terraform.tfvars
+# Ignore the Terraform lock file
+.terraform.lock.hcl
