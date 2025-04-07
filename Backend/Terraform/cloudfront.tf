@@ -6,8 +6,8 @@ locals {
 resource "aws_cloudfront_distribution" "s3_distribution" {
   enabled = true
   origin {
-    #domain_name = aws_s3_bucket.website_bucket.bucket_regional_domain_name
-    domain_name = aws_s3_bucket.website_bucket.website_endpoint
+    domain_name = aws_s3_bucket.website_bucket.bucket_regional_domain_name
+    #domain_name = aws_s3_bucket.website_bucket.website_endpoint
     #domain_name = "http://${var.bucket_name}.s3-website-${var.region}.amazonaws.com"
 
     origin_id = local.s3_origin_id
