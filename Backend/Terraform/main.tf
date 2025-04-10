@@ -26,6 +26,7 @@ resource "aws_s3_bucket_public_access_block" "allow_public_policy" {
   restrict_public_buckets = false
 }
 
+
 # Bucket Policy
 resource "aws_s3_bucket_policy" "bucket_policy" {
   bucket = aws_s3_bucket.website_bucket.id
@@ -45,6 +46,7 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
 
   depends_on = [aws_s3_bucket_public_access_block.allow_public_policy]
 }
+
 
 # Upload frontend files
 resource "aws_s3_object" "frontend_objects" {
