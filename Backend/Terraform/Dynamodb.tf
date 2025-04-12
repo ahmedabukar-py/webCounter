@@ -1,12 +1,12 @@
 # Create DynamoDB Table
 resource "aws_dynamodb_table" "visitor_counts" {
-  name           = "VisitorCounts"
-  billing_mode   = "PAY_PER_REQUEST"  # On-demand pricing
-  hash_key       = "PageID"
-  
+  name         = "VisitorCounts"
+  billing_mode = "PAY_PER_REQUEST" # On-demand pricing
+  hash_key     = "PageID"
+
   attribute {
     name = "PageID"
-    type = "S"  # String type
+    type = "S" # String type
   }
 
   # Optional: Add timestamp attribute for when counts were last updated
@@ -17,9 +17,9 @@ resource "aws_dynamodb_table" "visitor_counts" {
 
   # Optional: Global Secondary Index for querying by timestamp
   global_secondary_index {
-    name               = "LastUpdatedIndex"
-    hash_key          = "LastUpdated"
-    projection_type    = "ALL"
+    name            = "LastUpdatedIndex"
+    hash_key        = "LastUpdated"
+    projection_type = "ALL"
   }
 }
 
@@ -35,7 +35,7 @@ resource "aws_iam_role" "dynamodb_role" {
         Action = "sts:AssumeRole"
         Effect = "Allow"
         Principal = {
-          Service = "lambda.amazonaws.com"  # Adjust based on your needs (e.g., EC2, Lambda)
+          Service = "lambda.amazonaws.com" # Adjust based on your needs (e.g., EC2, Lambda)
         }
       }
     ]
@@ -66,7 +66,7 @@ resource "aws_iam_policy" "dynamodb_policy" {
         ]
         Resource = [
           aws_dynamodb_table.visitor_counts.arn,
-          "${aws_dynamodb_table.visitor_counts.arn}/index/*"  # Include GSI access
+          "${aws_dynamodb_table.visitor_counts.arn}/index/*" # Include GSI access
         ]
       }
     ]

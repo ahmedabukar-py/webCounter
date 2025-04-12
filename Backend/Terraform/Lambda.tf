@@ -12,9 +12,9 @@ resource "aws_lambda_function" "visitor_counter" {
   filename         = data.archive_file.lambda_zip.output_path
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
   function_name    = "visitor-counter"
-  role            = aws_iam_role.dynamodb_role.arn
-  handler         = "lambda_function.lambda_handler"
-  runtime         = "python3.9"
+  role             = aws_iam_role.dynamodb_role.arn
+  handler          = "lambda_function.lambda_handler"
+  runtime          = "python3.9"
 
   environment {
     variables = {

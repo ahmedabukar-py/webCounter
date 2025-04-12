@@ -60,7 +60,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     target_origin_id       = local.s3_origin_id
 
     forwarded_values {
-      query_string = false
+      query_string = true
       cookies {
         forward = "none"
       }
@@ -68,6 +68,10 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   depends_on = [aws_acm_certificate_validation.cert]
+
+  provisioner "local-exec" {
+    command = "aws cloudfront create-invalidation --distribution-id ${self.id} --paths '/*'"
+  }
 
 
 }
@@ -107,26 +111,3 @@ resource "aws_acm_certificate_validation" "cert" {
     for dvo in aws_route53_record.cert_validation : dvo.fqdn
   ]
 }
-/*
-resource "aws_cloudfront_origin_access_identity" "oai" {
-  comment = "OAI for ${var.domain_name}"
-}
-
-resource "aws_s3_bucket_policy" "allow_access_from_cloudfront" {
-  bucket = aws_s3_bucket.website_bucket.id
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Sid       = "AllowCloudFrontAccess"
-        Effect    = "Allow"
-        Principal = {
-          AWS = aws_cloudfront_origin_access_identity.oai.iam_arn
-        }
-        Action   = "s3:GetObject"
-        Resource = "${aws_s3_bucket.website_bucket.arn}/*"
-      }
-    ]
-  })
-}
-*/

@@ -1,6 +1,6 @@
 # API Gateway
 resource "aws_api_gateway_rest_api" "visitor_counter" {
-  name = "visitor-counter-api"
+  name        = "visitor-counter-api"
   description = "API for visitor counter"
 }
 
@@ -33,8 +33,8 @@ resource "aws_api_gateway_integration" "lambda" {
   resource_id             = aws_api_gateway_resource.visitor_count.id
   http_method             = aws_api_gateway_method.post_count.http_method
   integration_http_method = "POST"
-  type                   = "AWS_PROXY"
-  uri                    = aws_lambda_function.visitor_counter.invoke_arn
+  type                    = "AWS_PROXY"
+  uri                     = aws_lambda_function.visitor_counter.invoke_arn
 }
 
 # CORS Integration Response
@@ -92,10 +92,10 @@ resource "aws_api_gateway_integration_response" "options" {
 # Deployment
 resource "aws_api_gateway_deployment" "deployment" {
   rest_api_id = aws_api_gateway_rest_api.visitor_counter.id
-  
+
   depends_on = [
     aws_api_gateway_integration.lambda,
-    aws_api_gateway_integration.get_lambda,  # Add this line
+    aws_api_gateway_integration.get_lambda, # Add this line
     aws_api_gateway_integration.options,
   ]
 
@@ -107,8 +107,8 @@ resource "aws_api_gateway_deployment" "deployment" {
 # Stage
 resource "aws_api_gateway_stage" "dev" {
   deployment_id = aws_api_gateway_deployment.deployment.id
-  rest_api_id  = aws_api_gateway_rest_api.visitor_counter.id
-  stage_name   = "dev"
+  rest_api_id   = aws_api_gateway_rest_api.visitor_counter.id
+  stage_name    = "dev"
 }
 
 # Lambda Permission
