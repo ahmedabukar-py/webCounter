@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const pageId = "home";
 
     // Replace this URL with your actual API Gateway URL including the resource path
-    const apiUrl = "https://a80c3muj3m.execute-api.us-east-1.amazonaws.com/dev/visitor-count";
+    const apiUrl = "https://6f0ubtmmd7.execute-api.us-east-1.amazonaws.com/dev/visitor-count";
 
     try {
         // Send a POST request to the API Gateway endpoint
