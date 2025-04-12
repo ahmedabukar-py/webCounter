@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             // Update the DOM element with the visitor count
             // Make sure there's an element with id="visitorCount" in your HTML
-            document.getElementById("visitorCount").textContent = data.visitorCount;
+            document.getElementById("visitorCount").textContent = data.VisitorCount;
         } else {
             // Log an error message if the request fails
             console.error("Failed to fetch visitor count. Status:", response.status);
