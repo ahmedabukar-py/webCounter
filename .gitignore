@@ -16,3 +16,4 @@ Backend/Terraform/terraform.tfstate.*
 Backend/Terraform/terraform.tfvars
 # Ignore the Terraform lock file
 .terraform.lock.hcl
+Backend/frontend/config.json
