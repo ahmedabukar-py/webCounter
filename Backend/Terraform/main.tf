@@ -56,6 +56,8 @@ resource "aws_s3_object" "frontend_objects" {
   source       = "${var.frontend_directory}/${each.value}"
   etag         = filemd5("${var.frontend_directory}/${each.value}")
   content_type = lookup(local.mime_types, regex("\\.[^.]+$", each.value), null)
+
+  depends_on = [local_file.frontend_config] 
 }
 
 # MIME types
