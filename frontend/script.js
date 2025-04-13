@@ -4,9 +4,52 @@ document.addEventListener("DOMContentLoaded", async function () {
     const pageId = "home";
 
     // Replace this URL with your actual API Gateway URL including the resource path
-    const apiUrl = "https://6f0ubtmmd7.execute-api.us-east-1.amazonaws.com/dev/visitor-count";
+    // const apiUrl = "https://6f0ubtmmd7.execute-api.us-east-1.amazonaws.com/dev/visitor-count";
 
+
+    async function fetchVisitorCount(apiUrl) {
+        const response = await fetch(apiUrl, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        return await response.json();
+    }
+
+    async function incrementVisitorCount(apiUrl) {
+        const response = await fetch(apiUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({ pageId })
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        return await response.json();
+    }
+  
     try {
+
+        const configResponse = await fetch("config.json");
+        if (!configResponse.ok) {
+            throw new Error("Failed to load config.json");
+        }
+
+        const config = await configResponse.json();
+        const apiUrl = config.apiUrl;
+
         // Send a POST request to the API Gateway endpoint
         const response = await fetch(apiUrl, {
             method: "POST", // Use POST method as per API design

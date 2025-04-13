@@ -64,6 +64,7 @@ locals {
     ".html" = "text/html"
     ".js"   = "application/javascript"
     ".css"  = "text/css"
+    ".json" = "application/json"
   }
 }
 
@@ -72,7 +73,6 @@ resource "aws_route53_record" "www" {
   name    = "www"
   type    = "CNAME" # Changed from CNAME to A
   ttl     = 300
-  #records = ["http://${aws_s3_bucket_website_configuration.website_config.website_endpoint}"]
   records = [aws_cloudfront_distribution.s3_distribution.domain_name]
 
   depends_on = [aws_cloudfront_distribution.s3_distribution]

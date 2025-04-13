@@ -71,7 +71,8 @@ resource "aws_api_gateway_method_response" "options_200" {
   response_parameters = {
     "method.response.header.Access-Control-Allow-Headers" = true,
     "method.response.header.Access-Control-Allow-Methods" = true,
-    "method.response.header.Access-Control-Allow-Origin"  = true
+    "method.response.header.Access-Control-Allow-Origin"  = true,
+    "method.response.header.Access-Control-Max-Age"       = true
   }
 }
 
@@ -85,13 +86,24 @@ resource "aws_api_gateway_integration_response" "options" {
   response_parameters = {
     "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
     "method.response.header.Access-Control-Allow-Methods" = "'GET,POST,OPTIONS'",
-    "method.response.header.Access-Control-Allow-Origin"  = "'*'"
+    "method.response.header.Access-Control-Allow-Origin"  = "'https://www.skillspheres.com'"
+    "method.response.header.Access-Control-Max-Age"       = "'7200'"
   }
 }
 
 # Deployment
 resource "aws_api_gateway_deployment" "deployment" {
   rest_api_id = aws_api_gateway_rest_api.visitor_counter.id
+
+    triggers = {
+    # Add a trigger to force redeployment
+    redeployment = sha1(jsonencode([
+      aws_api_gateway_resource.visitor_count,
+      aws_api_gateway_method.options,
+      aws_api_gateway_integration.options,
+      aws_api_gateway_integration_response.options,
+    ]))
+  }
 
   depends_on = [
     aws_api_gateway_integration.lambda,
@@ -149,6 +161,39 @@ resource "aws_api_gateway_method_response" "get_200" {
     "method.response.header.Access-Control-Allow-Origin" = true
   }
 }
+
+# POST Integration Response
+resource "aws_api_gateway_integration_response" "post" {
+  rest_api_id = aws_api_gateway_rest_api.visitor_counter.id
+  resource_id = aws_api_gateway_resource.visitor_count.id
+  http_method = aws_api_gateway_method.post_count.http_method
+  status_code = aws_api_gateway_method_response.post_200.status_code
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = "'https://www.skillspheres.com'"
+  }
+
+  depends_on = [
+    aws_api_gateway_integration.lambda
+  ]
+}
+
+# Uncomment and update the GET Integration Response
+resource "aws_api_gateway_integration_response" "get_integration_response" {
+  rest_api_id = aws_api_gateway_rest_api.visitor_counter.id
+  resource_id = aws_api_gateway_resource.visitor_count.id
+  http_method = aws_api_gateway_method.get_count.http_method
+  status_code = aws_api_gateway_method_response.get_200.status_code
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = "'https://www.skillspheres.com'"
+  }
+
+  depends_on = [
+    aws_api_gateway_integration.get_lambda
+  ]
+}
+
 
 /*
 # GET Integration Response
