@@ -105,7 +105,7 @@ resource "aws_route53_record" "cert_validation" {
   zone_id         = var.zone_id
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 

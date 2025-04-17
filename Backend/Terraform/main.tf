@@ -89,6 +89,6 @@ resource "aws_route53_record" "www" {
   depends_on = [aws_cloudfront_distribution.s3_distribution]
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
