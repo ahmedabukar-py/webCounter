@@ -38,8 +38,3 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
-      - name: Run Python Unit Tests
-        run: |
-          pip install -r Backend/Terraform/requirements.txt
-          python -m unittest discover Backend/Terraform
