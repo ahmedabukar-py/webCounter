@@ -35,6 +35,7 @@ jobs:
       - name: Terraform Plan
         run: terraform plan
         working-directory: Backend/Terraform
+        timeout-minutes: 5
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
