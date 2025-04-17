@@ -103,6 +103,10 @@ resource "aws_route53_record" "cert_validation" {
   ttl             = 60
   type            = each.value.type
   zone_id         = var.zone_id
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_acm_certificate_validation" "cert" {

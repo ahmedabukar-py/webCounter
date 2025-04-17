@@ -57,7 +57,16 @@ resource "aws_s3_object" "frontend_objects" {
   etag         = filemd5("${var.frontend_directory}/${each.value}")
   content_type = lookup(local.mime_types, regex("\\.[^.]+$", each.value), null)
 
-  depends_on = [local_file.frontend_config] 
+}
+
+# upload config json to s3 
+resource "aws_s3_object" "config_json" {
+  bucket = aws_s3_bucket.website_bucket.id
+  key    = "config.json"
+  #source_hash  = filemd5("/Users/ahmedabdirahman/Documents/TerraformConfig/webCounter/frontend/config.json")
+  content      = local_file.generate_config.content
+  content_type = "application/json"
+  etag         = md5(local_file.generate_config.content)
 }
 
 # MIME types
@@ -78,4 +87,8 @@ resource "aws_route53_record" "www" {
   records = [aws_cloudfront_distribution.s3_distribution.domain_name]
 
   depends_on = [aws_cloudfront_distribution.s3_distribution]
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }

@@ -9,12 +9,22 @@ output "website_endpoint" {
 }
 
 output "api_gateway_url" {
-  value       = "${aws_api_gateway_stage.dev.invoke_url}/visitor-count"
+  value = "${aws_api_gateway_stage.dev.invoke_url}/visitor-count"
 }
 
+/*
 resource "local_file" "frontend_config" {
   content = jsonencode({
     apiUrl = "${aws_api_gateway_stage.dev.invoke_url}/visitor-count"
   })
   filename = "/Users/ahmedabdirahman/Documents/TerraformConfig/webCounter/frontend/config.json"  # adjust path to match your project layout
 }
+*/
+
+resource "local_file" "generate_config" {
+  content = jsonencode({
+  apiUrl = "${aws_api_gateway_stage.dev.invoke_url}/visitor-count" })
+  filename = "/Users/ahmedabdirahman/Documents/TerraformConfig/webCounter/frontend/config.json"
+}
+
+

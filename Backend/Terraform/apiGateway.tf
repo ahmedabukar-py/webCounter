@@ -95,7 +95,7 @@ resource "aws_api_gateway_integration_response" "options" {
 resource "aws_api_gateway_deployment" "deployment" {
   rest_api_id = aws_api_gateway_rest_api.visitor_counter.id
 
-    triggers = {
+  triggers = {
     # Add a trigger to force redeployment
     redeployment = sha1(jsonencode([
       aws_api_gateway_resource.visitor_count,
