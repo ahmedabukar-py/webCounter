@@ -40,8 +40,8 @@ jobs:
         working-directory: Backend/Terraform
 
       - name: Debug Env Vars
-        run:
-        echo "Region: $TF_VAR_region"
+        run: |
+          echo "Region: $TF_VAR_region"
 
       - name: Terraform Plan
         run: terraform plan
