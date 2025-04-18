@@ -6,13 +6,6 @@ variable "bucket_name" {
 variable "index_document" {
   description = "The index document for the website"
   type        = string
-  default     = "index.html"
-}
-
-variable "error_document" {
-  description = "The error document for the website"
-  type        = string
-  default     = "error.html"
 }
 
 variable "frontend_directory" {
@@ -29,11 +22,13 @@ variable "domain_name" {
   type = string
 }
 
-variable "cert_validation_name" {
-  type = string
+variable "error_document" {
+  description = "The error document for the website"
+  type        = string
 }
 
 variable "region" {
   description = "The region resource will be provisioned in"
   type        = string
 }
+
