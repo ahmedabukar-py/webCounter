@@ -20,6 +20,8 @@ jobs:
         TF_VAR_frontend_directory: ${{ secrets.TF_VAR_frontend_directory }}
         TF_VAR_domain_name: ${{ secrets.TF_VAR_domain_name }}
         TF_VAR_zone_id: ${{ secrets.TF_VAR_zone_id}}
+        TF_VAR_INDEX_DOCUMENT: ${{ secrets.TF_VAR_INDEX_DOCUMENT}}
+        TF_VAR_ERROR_DOCUMENT: ${{ secrets.TF_VAR_ERROR_DOCUMENT}}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
