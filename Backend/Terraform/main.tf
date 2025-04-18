@@ -63,7 +63,6 @@ resource "aws_s3_object" "frontend_objects" {
 resource "aws_s3_object" "config_json" {
   bucket = aws_s3_bucket.website_bucket.id
   key    = "config.json"
-  #source_hash  = filemd5("/Users/ahmedabdirahman/Documents/TerraformConfig/webCounter/frontend/config.json")
   content      = local_file.generate_config.content
   content_type = "application/json"
   etag         = md5(local_file.generate_config.content)

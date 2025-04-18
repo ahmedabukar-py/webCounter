@@ -15,6 +15,6 @@ provider "aws" {
 */
 provider "aws" {
   region                   = var.region
-  shared_credentials_files = ["/Users/ahmedabdirahman/.aws/credentials"]
+  shared_credentials_files = ["~/.aws/credentials"]
   //profile                  = "vscode"
 }

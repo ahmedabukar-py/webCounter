@@ -22,6 +22,7 @@ jobs:
         TF_VAR_zone_id: ${{ vars.TF_VAR_ZONE_ID }}
         TF_VAR_index_document: ${{ vars.TF_VAR_INDEX_DOCUMENT }}
         TF_VAR_error_document: ${{ vars.TF_VAR_ERROR_DOCUMENT }}
+        TF_VAR_frontend_path: ${{ vars.TF_VAR_FRONTEND_PATH }}
 
     steps:
       - name: Checkout Code

@@ -24,7 +24,7 @@ resource "local_file" "frontend_config" {
 resource "local_file" "generate_config" {
   content = jsonencode({
   apiUrl = "${aws_api_gateway_stage.dev.invoke_url}/visitor-count" })
-  filename = "/Users/ahmedabdirahman/Documents/TerraformConfig/webCounter/frontend/config.json"
+  filename = var.frontend_path
 }
 
 

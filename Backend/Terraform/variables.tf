@@ -32,3 +32,8 @@ variable "region" {
   type        = string
 }
 
+variable "frontend_path" {
+  description = "Path to frontend config.json"
+  type        = string
+}
+
