@@ -61,8 +61,8 @@ resource "aws_s3_object" "frontend_objects" {
 
 # upload config json to s3 
 resource "aws_s3_object" "config_json" {
-  bucket = aws_s3_bucket.website_bucket.id
-  key    = "config.json"
+  bucket       = aws_s3_bucket.website_bucket.id
+  key          = "config.json"
   content      = local_file.generate_config.content
   content_type = "application/json"
   etag         = md5(local_file.generate_config.content)
