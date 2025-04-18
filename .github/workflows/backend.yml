@@ -22,7 +22,7 @@ jobs:
         TF_VAR_zone_id: ${{ secrets.TF_VAR_zone_id}}
         TF_VAR_index_document: ${{ secrets.TF_VAR_index_document}}
         TF_VAR_error_document: ${{ secrets.TF_VAR_error_document}}
-        
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -41,7 +41,7 @@ jobs:
 
       - name: Debug Env Vars
         run:
-          echo "Region: $TF_VAR_region"
+        echo "Region: $TF_VAR_region"
 
       - name: Terraform Plan
         run: terraform plan
