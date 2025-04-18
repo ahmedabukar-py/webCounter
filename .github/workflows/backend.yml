@@ -15,13 +15,13 @@ jobs:
     env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        TF_VAR_bucket_name: ${{ secrets.TF_VAR_bucket_name }}
-        TF_VAR_region: ${{ secrets.TF_VAR_region }}
-        TF_VAR_frontend_directory: ${{ secrets.TF_VAR_frontend_directory }}
-        TF_VAR_domain_name: ${{ secrets.TF_VAR_domain_name }}
-        TF_VAR_zone_id: ${{ secrets.TF_VAR_zone_id}}
-        TF_VAR_index_document: ${{ secrets.TF_VAR_index_document}}
-        TF_VAR_error_document: ${{ secrets.TF_VAR_error_document}}
+        TF_VAR_bucket_name: ${{ vars.TF_VAR_BUCKET_NAME }}
+        TF_VAR_region: ${{ vars.TF_VAR_REGION }}
+        TF_VAR_frontend_directory: ${{ vars.TF_VAR_FRONTEND_DIRECTORY }}
+        TF_VAR_domain_name: ${{ vars.TF_VAR_DOMAIN_NAME }}
+        TF_VAR_zone_id: ${{ vars.TF_VAR_ZONE_ID }}
+        TF_VAR_index_document: ${{ vars.TF_VAR_INDEX_DOCUMENT }}
+        TF_VAR_error_document: ${{ vars.TF_VAR_ERROR_DOCUMENT }}
 
     steps:
       - name: Checkout Code
