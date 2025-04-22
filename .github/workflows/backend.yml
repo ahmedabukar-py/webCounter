@@ -52,4 +52,9 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve
         working-directory: Backend/Terraform
-    
+
+
+      - name: Terraform Destroy
+        if: always()  # This ensures it runs even if previous steps fail
+        run: terraform destroy -auto-approve
+        working-directory: Backend/Terraform
