@@ -9,7 +9,7 @@ terraform {
 /*
 provider "aws" {
   region                   = "us-west-2"
-  shared_credentials_files = ["/Users/ahmedabdirahman/.aws/credentials"]
+  shared_credentials_files = ["~/.aws/credentials"]
   profile                  = "vscode"
 }
 */
